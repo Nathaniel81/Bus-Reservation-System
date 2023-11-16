@@ -56,6 +56,7 @@ class Booking(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     schedule = models.ForeignKey(Schedule, on_delete=models.CASCADE)
     seat_number = models.PositiveIntegerField(unique=True)
+    payment_status = models.BooleanField(default=False)
     
     def __str__(self):
         return f"{self.user.name} - {self.schedule}"

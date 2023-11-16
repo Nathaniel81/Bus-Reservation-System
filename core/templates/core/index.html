@@ -5,5 +5,10 @@
 	{% for schedule in schedules %} 
 	<div>{{ schedule }}</div>
 	{% endfor %}
+
+	<form method="GET" action="." class="mt-4">
+		<input type="text" name="query" value="{{ query }}"  class="form-control" />
+		<button class="btn btn-primary mt-2">Search</button>
+	</form>
 </div>
 {% endblock %}
