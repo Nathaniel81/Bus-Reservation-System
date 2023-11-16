@@ -1,0 +1,35 @@
+htmlcov/
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Local development settings
+*.sqlite3
+*.db
+*.sqlite
+
+# Secret keys
+.secret_key
+
+# Media files
+media/
+
+# Static files
+# staticfiles/
+
+# Log files
+*.log
+
+# Pipenv
+Pipfile
+Pipfile.lock
+
+# Other environment files
+.env
+
+node_modules/
+.eslintrc.js
+package-lock.json
+package.json
