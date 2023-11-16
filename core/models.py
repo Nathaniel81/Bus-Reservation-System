@@ -3,6 +3,13 @@ from django.db import models
 from phonenumber_field.modelfields import PhoneNumberField
 import uuid
 
+
+TIME_CHOICES = (
+        ('morning', 'Morning'),
+        ('afternoon', 'Afternoon'),
+        ('evening', 'Evening'),
+    )
+
 class User(AbstractUser):
     name = models.CharField(max_length=100, unique=True)
     phone_number = PhoneNumberField(unique=True)
@@ -36,7 +43,11 @@ class Schedule(models.Model):
     departure = models.ForeignKey(Location, related_name='departures', on_delete=models.CASCADE)
     destination = models.ForeignKey(Location, related_name='destinations', on_delete=models.CASCADE)
     bus = models.ForeignKey(Bus, on_delete=models.CASCADE)
-    
+    price = models.FloatField()
+    time_of_day = models.CharField(max_length=10, choices=TIME_CHOICES)
+    updated = models.DateTimeField(auto_now=True)
+    created = models.DateTimeField(auto_now_add=True)
+
     def __str__(self):
         return f"{self.departure} to {self.destination} (Bus: {self.bus.name}/{self.bus.number})"
 

@@ -1,0 +1,9 @@
+{% extends 'core/base.html' %}
+{% load static %}
+{% block content %}
+<div class="container">
+	{% for schedule in schedules %} 
+	<div>{{ schedule }}</div>
+	{% endfor %}
+</div>
+{% endblock %}

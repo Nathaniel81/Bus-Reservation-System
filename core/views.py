@@ -1,3 +1,9 @@
 from django.shortcuts import render
+from .models import *
 
-# Create your views here.
+
+def index(request):
+    context = {}
+    context['schedules'] = Schedule.objects.all()
+
+    return render(request, 'core/index.html', context)
