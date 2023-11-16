@@ -47,4 +47,4 @@ class Booking(models.Model):
     seat_number = models.PositiveIntegerField(unique=True)
     
     def __str__(self):
-        return f"{self.user.name} - {self.schedule.__Str__()}"
+        return f"{self.user.name} - {self.schedule}"
