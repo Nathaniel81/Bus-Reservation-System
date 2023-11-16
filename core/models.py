@@ -5,7 +5,7 @@ import uuid
 
 class User(AbstractUser):
     name = models.CharField(max_length=100, unique=True)
-    phone_number = PhoneNumberField(blank=True)
+    phone_number = PhoneNumberField(unique=True)
     email = models.EmailField(unique=True, null=True)
 
     USERNAME_FIELD = 'username'
@@ -17,7 +17,7 @@ class User(AbstractUser):
 class Bus(models.Model):
     name = models.CharField(max_length=100)
     number = models.PositiveIntegerField()
-    status = models.BooleanField(default=True)
+    status = models.BooleanField(default=False)
     driver = models.CharField(max_length=100)
     number_of_seats = models.PositiveIntegerField()
     
@@ -26,7 +26,7 @@ class Bus(models.Model):
 
 class Location(models.Model):
     name = models.CharField(max_length=100)
-    status = models.BooleanField(default=True)
+    status = models.BooleanField(default=False)
     
     def __str__(self):
         return f"{self.name}"
@@ -44,6 +44,7 @@ class Booking(models.Model):
     code = models.UUIDField(default=uuid.uuid4, editable=False, unique=True)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     schedule = models.ForeignKey(Schedule, on_delete=models.CASCADE)
+    seat_number = models.PositiveIntegerField(unique=True)
     
     def __str__(self):
         return f"{self.user.name} - {self.schedule.__Str__()}"
