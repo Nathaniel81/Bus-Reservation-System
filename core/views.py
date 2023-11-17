@@ -50,4 +50,3 @@ def delete_booking(request, code):
     booking.delete()
 
     return redirect('scheduled')
-
