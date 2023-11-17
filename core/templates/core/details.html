@@ -30,5 +30,14 @@
 			{% endfor %}
 		</tbody>
 	</table>
+	<div>
+		{% for booking in bookings %} 
+		<a href="{% url 'detail' booking.code %}">
+			<div class="mt-5">
+				<div>{{ booking.user.username }} | {{ booking.seat_number }}</div>
+			</div>
+		</a>
+		{% endfor %}
+	</div>
 </div>
 {% endblock %}
