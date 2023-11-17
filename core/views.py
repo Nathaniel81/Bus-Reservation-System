@@ -41,6 +41,11 @@ def scheduled(request):
 
 def delete_booking(request, code):
     booking = get_object_or_404(Booking, code=code)
+    schedule = booking.schedule
+    booked_seats = Booking.objects.filter(schedule=schedule).count()
+    schedule.bus.number_of_seats = schedule.bus.number_of_seats - booked_seats
     booking.delete()
+    schedule.bus.save()
+
     return redirect('scheduled')
 
