@@ -1,0 +1,13 @@
+{% extends 'core/base.html' %}
+{% load static %}
+{% block content %}
+
+<form action="{% url 'booking' code %}" method="POST">
+    {% csrf_token %}
+    <!-- <label for="seat_number" class="form-label">Seat Number:</label> -->
+    <!-- <input type="number" name="seat_number" id="seat_number" class="form-control" required /> -->
+    {{ form.as_p }}
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+
+{% endblock %}

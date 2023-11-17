@@ -2,13 +2,46 @@
 {% load static %}
 {% block content %}
 <div class="container">
-	{% for schedule in schedules %} 
-	<div>{{ schedule }}</div>
+	{% for booking in bookings %} 
+	<a href="{% url 'detail' booking.code %}">
+		<div class="mt-5">
+			<div>{{ booking.user.username }} | {{ booking.seat_number }}</div>
+		</div>
+	</a>
 	{% endfor %}
-
 	<form method="GET" action="." class="mt-4">
 		<input type="text" name="query" value="{{ query }}"  class="form-control" />
 		<button class="btn btn-primary mt-2">Search</button>
 	</form>
+	{% for schedule in schedules %} 
+	<a href="{% url 'booking' schedule.code %}">
+		<div class="mt-5">
+			<div>{{ schedule }}</div>
+		</div>
+	</a>
+	{% endfor %}
+	<div class="m-auto p-5">
+			<table class="table table-bordered">
+				<thead>
+				    <tr>
+				        <th>ID</th>
+				        <th>Name</th>
+				        <th>Email</th>
+				    </tr>
+				</thead>
+				<tbody>
+				    <tr>
+				        <td>1</td>
+				        <td>John Doe</td>
+				        <td>john@example.com</td>
+				    </tr>
+				    <tr>
+				        <td>2</td>
+				        <td>Jane Smith</td>
+				        <td>jane@example.com</td>
+				    </tr>
+				</tbody>
+			</table>
+	</div>
 </div>
 {% endblock %}
