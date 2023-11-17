@@ -9,6 +9,10 @@ TIME_CHOICES = (
         ('afternoon', 'Afternoon'),
         ('evening', 'Evening'),
     )
+STATUS_CHOICES = (
+    ('1','Active'),
+    ('0','Cancelled')
+    )
 
 class User(AbstractUser):
     name = models.CharField(max_length=100, unique=True)
@@ -44,6 +48,7 @@ class Schedule(models.Model):
     destination = models.ForeignKey(Location, related_name='destinations', on_delete=models.CASCADE)
     bus = models.ForeignKey(Bus, on_delete=models.CASCADE)
     price = models.FloatField()
+    status = models.CharField(max_length=2, choices=STATUS_CHOICES , default=1)
     time_of_day = models.CharField(max_length=10, choices=TIME_CHOICES, default='morning')
     date = models.DateTimeField()
     updated = models.DateTimeField(auto_now=True)
