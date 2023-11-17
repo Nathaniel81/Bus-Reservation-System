@@ -57,7 +57,7 @@ class Schedule(models.Model):
     def count_available(self):
         booked_seats = Booking.objects.filter(schedule=self).count()
         return self.bus.number_of_seats - booked_seats
-
+    
     def __str__(self):
         return f"{self.departure} to {self.destination} (Bus: {self.bus.name}/{self.bus.number})"
 
