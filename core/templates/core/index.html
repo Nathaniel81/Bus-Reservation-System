@@ -13,35 +13,43 @@
 		<input type="text" name="query" value="{{ query }}"  class="form-control" />
 		<button class="btn btn-primary mt-2">Search</button>
 	</form>
-	{% for schedule in schedules %} 
-	<a href="{% url 'booking' schedule.code %}">
-		<div class="mt-5">
-			<div>{{ schedule }}</div>
-		</div>
-	</a>
-	{% endfor %}
-	<div class="m-auto p-5">
-			<table class="table table-bordered">
-				<thead>
-				    <tr>
-				        <th>ID</th>
-				        <th>Name</th>
-				        <th>Email</th>
-				    </tr>
-				</thead>
-				<tbody>
-				    <tr>
-				        <td>1</td>
-				        <td>John Doe</td>
-				        <td>john@example.com</td>
-				    </tr>
-				    <tr>
-				        <td>2</td>
-				        <td>Jane Smith</td>
-				        <td>jane@example.com</td>
-				    </tr>
-				</tbody>
-			</table>
+
+	<div class="m-auto p-5 mb-4">
+		<table class="table table-bordered table-hover table-striped">
+			<thead class="table-primary">
+				<tr>
+					<th>#</th>
+					<th>Available Seats</th>
+					<th>Schedule</th>
+					<th>Bus</th>
+					<th>Route(From - To)</th>
+					<th>Fare</th>
+					<th>Time</th>
+					<th>Action</th>
+				</tr>
+			</thead>
+			<tbody>
+				{% for schedule in schedules %}
+				<tr>
+					<td>{{ forloop.counter }}</td>
+					<td>{{ schedule.bus.number_of_seats }}</td>
+					<td>{{ schedule.date|date:"Y-m-d h:i A" }}</td>
+					<td>{{ schedule.bus.name }}</td>
+					<td>{{ schedule.departure }} - {{ schedule.destination }}</td>
+					<td>{{ schedule.price }}</td>
+					<td>{{ schedule.time_of_day }}</td>
+					<td><a href="{% url 'booking' schedule.code %}">Book</a></td>
+				</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+		
 	</div>
 </div>
+<style>
+	.table {
+		border-collapse: separate;
+		border-spacing:2px 0;
+	}
+</style>
 {% endblock %}

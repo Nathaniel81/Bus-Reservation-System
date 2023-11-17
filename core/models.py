@@ -45,6 +45,7 @@ class Schedule(models.Model):
     bus = models.ForeignKey(Bus, on_delete=models.CASCADE)
     price = models.FloatField()
     time_of_day = models.CharField(max_length=10, choices=TIME_CHOICES, default='morning')
+    date = models.DateTimeField()
     updated = models.DateTimeField(auto_now=True)
     created = models.DateTimeField(auto_now_add=True)
 
