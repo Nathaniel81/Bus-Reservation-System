@@ -4,8 +4,7 @@ from .models import *
 from .forms import BookingForm
 
 def index(request):
-    context = {}
-    
+    context = {}  
     query = request.GET.get('query', '')
     if query:
         context['schedules'] = Schedule.objects.filter(
