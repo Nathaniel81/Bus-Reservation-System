@@ -9,7 +9,7 @@
 				<th>Schedule</th>
 				<th>Seat Number</th>
 				<th>Bus</th>
-				<th>Route(From - To)</th>
+				<th>Route (From - To)</th>
 				<th>Fare</th>
 				<th>Status</th>
 				<th>Action</th>
@@ -42,7 +42,11 @@
 					</div>
 				</td>
 				<td class="px-2 py-1 align-middle text-center">{{ booking.schedule.price }}</td>
-				<td class="px-2 py-1 align-middle text-center">{{ booking.schedule.get_status_display }}</td>
+				<td class="px-2 py-1 align-middle text-center">
+					<small class="bg-primary badge rounded-pill bg-gradient px-2">
+						{{ booking.schedule.get_status_display }}
+					</small>
+				</td>
 				<td class="px-2 py-1 align-middle text-center">
 					<a href="" class="btn btn-sm btn-outline-danger ">Cancel</a>
 				</td>
