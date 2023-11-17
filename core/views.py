@@ -36,8 +36,10 @@ def booking(request, code):
     else:
         return render(request, 'core/forms.html', {'form': BookingForm(), 'code': code})
 
-def detail(request, code):
-    booking = get_object_or_404(Booking, code=code)
-    context = {'code': code, 'booking': booking}
+def scheduled(request):
+    # user = get_object_or_404(User, pk=pk)
+    bookings = Booking.objects.filter(user=request.user)
+    
+    context = {'bookings': bookings}
 
-    return render(request, 'core/details.html', context)
+    return render(request, 'core/scheduled_trip.html', context)
