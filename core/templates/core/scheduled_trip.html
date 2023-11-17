@@ -54,7 +54,7 @@
 					{% endif %}
 				</td>
 				<td class="px-2 py-1 align-middle text-center">
-					<a href="" class="btn btn-sm btn-outline-danger ">Cancel</a>
+					<a href="{% url 'delete-booking' booking.code %}" class="btn btn-sm btn-outline-danger ">Cancel</a>
 				</td>
 			</tr>
 			{% endfor %}

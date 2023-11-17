@@ -53,6 +53,10 @@ class Schedule(models.Model):
     date = models.DateTimeField()
     updated = models.DateTimeField(auto_now=True)
     created = models.DateTimeField(auto_now_add=True)
+    
+    def count_available(self):
+        booked_seats = Booking.objects.filter(schedule=self).count()
+        return self.bus.number_of_seats - booked_seats
 
     def __str__(self):
         return f"{self.departure} to {self.destination} (Bus: {self.bus.name}/{self.bus.number})"

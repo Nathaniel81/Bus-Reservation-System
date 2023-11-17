@@ -39,6 +39,9 @@ def booking(request, code):
 def scheduled(request):
     return render(request, 'core/scheduled_trip.html', {'bookings': Booking.objects.filter(user=request.user)})
 
-def delete_schedule(request):
-    pass
+def delete_booking(request, code):
+    booking = get_object_or_404(Booking, code=code)
+    booking.delete()
+    booking.seat_number -= 1
+    return redirect('scheduled')
 
