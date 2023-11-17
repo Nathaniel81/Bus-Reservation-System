@@ -42,6 +42,5 @@ def scheduled(request):
 def delete_booking(request, code):
     booking = get_object_or_404(Booking, code=code)
     booking.delete()
-    booking.seat_number -= 1
     return redirect('scheduled')
 
