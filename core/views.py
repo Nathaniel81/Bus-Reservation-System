@@ -5,6 +5,7 @@ from .forms import BookingForm
 
 def index(request):
     context = {}
+    
     query = request.GET.get('query', '')
     if query:
         context['schedules'] = Schedule.objects.filter(
@@ -29,7 +30,10 @@ def booking(request, code):
             book.schedule = schedule
             book.payment_status = True
             book.save()
-            return redirect('detail', book.code)
+            booked_seats = Booking.objects.filter(schedule=schedule).count()
+            schedule.bus.number_of_seats = schedule.bus.number_of_seats - booked_seats
+            schedule.bus.save()                
+            return redirect('scheduled')
         else:
             print(form.errors)
             return render(request, 'core/forms.html', {'form': form, 'code': code})
@@ -42,10 +46,9 @@ def scheduled(request):
 def delete_booking(request, code):
     booking = get_object_or_404(Booking, code=code)
     schedule = booking.schedule
-    booked_seats = Booking.objects.filter(schedule=schedule).count()
-    schedule.bus.number_of_seats = schedule.bus.number_of_seats - booked_seats
-    booking.delete()
+    schedule.bus.number_of_seats = schedule.bus.number_of_seats + 1
     schedule.bus.save()
+    booking.delete()
 
     return redirect('scheduled')
 
