@@ -9,31 +9,7 @@ from .models import *
 from .forms import BookingForm
 
 def index(request):
-    schedules=None
-    items_page=None
-    query = request.GET.get('query', '')
-    if query:
-        schedules = Schedule.objects.filter(
-			Q(departure__name__icontains=query)|
-			Q(destination__name__icontains=query)|
-			Q(bus__name__icontains=query)|
-			Q(bus__driver__icontains=query)
-		).distinct()
-
-        default_page = 1
-        page = request.GET.get('page', default_page)
-        items_per_page = 1
-        paginator = Paginator(schedules, items_per_page)
-
-        try:
-            items_page = paginator.page(page)
-        except PageNotAnInteger:
-            items_page = paginator.page(default_page)
-        except EmptyPage:
-            items_page = paginator.page(paginator.num_pages)
-
-    context = {'schedules': schedules, 'items_page': items_page, 'query': query}
-    return render(request, 'core/index.html', context)
+    return render(request, 'core/index.html')
 
 def booking(request, code):
     if request.method == 'POST':
@@ -86,4 +62,21 @@ def find_trip(request):
     context = {'locations': locations}
     return render(request, 'core/find-trip.html', context)
 
+def searched_trip(request):
+    depart = request.POST.get('depart')
+    destination = request.POST.get('destination')
+    schedules = Schedule.objects.filter(departure=depart, destination=destination)
+    default_page = 1
+    page = request.GET.get('page', default_page)
+    items_per_page = 1
+    paginator = Paginator(schedules, items_per_page)
+    try:
+        items_page = paginator.page(page)
+    except PageNotAnInteger:
+        items_page = paginator.page(default_page)
+    except EmptyPage:
+        items_page = paginator.page(paginator.num_pages)
+        
+        
+    return render(request, 'core/searched-trip.html', {'schedules': items_page, 'items_page': items_page})
 
