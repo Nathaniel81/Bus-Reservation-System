@@ -57,12 +57,25 @@ def booking(request, code):
         return render(request, 'core/forms.html', {'form': BookingForm(), 'code': code})
 
 def scheduled(request):
-    return render(request, 'core/scheduled_trip.html', {'bookings': Booking.objects.filter(user=request.user)})
+    bookings = Booking.objects.filter(user=request.user)
+    default_page = 1
+    page = request.GET.get('page', default_page)
+    items_per_page = 1
+    paginator = Paginator(bookings, items_per_page)
+
+    try:
+        items_page = paginator.page(page)
+    except PageNotAnInteger:
+        items_page = paginator.page(default_page)
+    except EmptyPage:
+        items_page = paginator.page(paginator.num_pages)
+    
+    return render(request, 'core/scheduled_trip.html', {'bookings': items_page, 'items_page': items_page})
 
 def delete_booking(request, code):
     booking = get_object_or_404(Booking, code=code)
     schedule = booking.schedule
-    schedule.bus.number_of_seats = schedule.bus.number_of_seats + 1
+    schedule.bus.number_of_seats += 1
     schedule.bus.save()
     booking.delete()
 

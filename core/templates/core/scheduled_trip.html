@@ -2,64 +2,98 @@
 {% load static %}
 {% block content %}
 <div class="mt-5 mb-4">
-	<table class="table table-bordered">
-		<thead class="table-primary">
-			<tr class="px-2 py-1 align-middle text-center">
-				<th>#</th>
-				<th>Schedule</th>
-				<th>Seat Number</th>
-				<th>Bus</th>
-				<th>Route (From - To)</th>
-				<th>Fare</th>
-				<th>Status</th>
-				<th>Action</th>
-			</tr>
-		</thead>
-		<tbody>
-			{% for booking in bookings %}
-			<tr>
-				<td class="px-2 py-1 align-middle text-center">{{ forloop.counter }}</td>
-				<td class="px-2 py-1 align-middle text-center">{{ booking.schedule.date|date:"Y-m-d h:i A" }}</td>
-				<td class="px-2 py-1 align-middle text-center">{{ booking.seat_number }}</td>
-				<td>
-					<div class="row row-cols-1">
-						<div class="col">
-							{{ booking.schedule.bus.name }}
+	<div class="card bg-light">
+		<div class="card-header fw-bold">Scheduled Trip</div>
+		<div class="card-body">
+			<table class="table table-bordered">
+				<thead class="table-primary">
+					<tr class="px-2 py-1 align-middle text-center">
+						<th>#</th>
+						<th>Schedule</th>
+						<th>Seat Number</th>
+						<th>Bus</th>
+						<th>Route (From - To)</th>
+						<th>Fare</th>
+						<th>Status</th>
+						<th>Action</th>
+					</tr>
+				</thead>
+				<tbody>
+					{% for booking in bookings %}
+					<tr>
+						<td class="px-2 py-1 align-middle text-center">{{ forloop.counter }}</td>
+						<td class="px-2 py-1 align-middle text-center">{{ booking.schedule.date|date:"Y-m-d h:i A" }}</td>
+						<td class="px-2 py-1 align-middle text-center">{{ booking.seat_number }}</td>
+						<td>
+							<div class="row row-cols-1">
+								<div class="col">
+									{{ booking.schedule.bus.name }}
+								</div>
+								<div class="col">
+									<small class="muted">{{ booking.schedule.bus.number }}</small>
+								</div>
+							</div>
+						</td>
+						<td> 
+							<div class="row row-cols-1">
+								<div class="col">
+									{{ booking.schedule.departure }}
+								</div>
+								<div class="col">
+									{{ booking.schedule.destination }}
+								</div>
+							</div>
+						</td>
+						<td class="px-2 py-1 align-middle text-center">{{ booking.schedule.price }}</td>
+						<td class="px-2 py-1 align-middle text-center">
+							{% if booking.schedule.status == '1' %}
+								<span class="bg-success badge rounded-pill bg-gradient px-2">
+									{{ booking.schedule.get_status_display }}
+								</span>
+							{% else %}
+								<span class="bg-danger badge rounded-pill bg-gradient px-2">
+									{{ booking.schedule.get_status_display }}
+								</span>
+							{% endif %}
+						</td>
+						<td class="px-2 py-1 align-middle text-center">
+							<a href="{% url 'delete-booking' booking.code %}" class="btn btn-sm btn-outline-danger ">Cancel</a>
+						</td>
+					</tr>
+					{% endfor %}
+				</tbody>
+			</table>
+			<div class="d-flex justify-content-end">
+				{% if items_page %}
+					{% if items_page.has_other_pages %}
+						<div class="btn-group" role="group" aria-label="Item pagination">
+							{% if items_page.has_previous %}
+								<a href="?page={{ items_page.previous_page_number }}" class="btn btn-outline-primary">&laquo;</a>
+							{% endif %}
+						
+							{% for page_number in items_page.paginator.page_range %}
+								{% if items_page.number == page_number %}
+									<button class="btn btn-outline-primary active">
+										<span>{{ page_number }} <span class="sr-only"></span></span>
+									</button>
+								{% else %}
+									<a href="?page={{ page_number }}" class="btn btn-outline-primary">
+										{{ page_number }}
+									</a>
+								{% endif %}
+							{% endfor %}
+								
+							{% if items_page.has_next %}
+								<a href="?page={{ items_page.next_page_number }}" class="btn btn-outline-primary">&raquo;</a>
+							{% endif %}
 						</div>
-						<div class="col">
-							<small class="muted">{{ booking.schedule.bus.number }}</small>
-						</div>
-					</div>
-				</td>
-				<td> 
-					<div class="row row-cols-1">
-						<div class="col">
-							{{ booking.schedule.departure }}
-						</div>
-						<div class="col">
-							{{ booking.schedule.destination }}
-						</div>
-					</div>
-				</td>
-				<td class="px-2 py-1 align-middle text-center">{{ booking.schedule.price }}</td>
-				<td class="px-2 py-1 align-middle text-center">
-					{% if booking.schedule.status == '1' %}
-						<span class="bg-success badge rounded-pill bg-gradient px-2">
-							{{ booking.schedule.get_status_display }}
-						</span>
-					{% else %}
-						<span class="bg-danger badge rounded-pill bg-gradient px-2">
-							{{ booking.schedule.get_status_display }}
-						</span>
 					{% endif %}
-				</td>
-				<td class="px-2 py-1 align-middle text-center">
-					<a href="{% url 'delete-booking' booking.code %}" class="btn btn-sm btn-outline-danger ">Cancel</a>
-				</td>
-			</tr>
-			{% endfor %}
-		</tbody>
-	</table>
+				{% else %}
+					<p>No items found.</p>
+				{% endif %}
+			</div>
+		</div>
+		</div>
 </div>
 <style>
 	table.table-bordered > thead > tr > th{
