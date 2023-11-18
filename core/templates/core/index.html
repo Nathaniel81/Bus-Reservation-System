@@ -7,7 +7,7 @@
 		<button class="btn btn-primary mt-2">Search</button>
 	</form>
 	<div class="mt-5 mb-4">
-		<table class="table table-bordered table-hover table-striped">
+		<table class="table table-bordered">
 			<thead class="table-primary">
 				<tr>
 					<th>#</th>
@@ -22,9 +22,9 @@
 			<tbody>
 				{% for schedule in schedules %}
 				<tr>
-					<td>{{ forloop.counter }}</td>
-					<td>{{ schedule.bus.number_of_seats }}</td>
-					<td>
+					<td class="px-2 py-1 align-middle text-center">{{ forloop.counter }}</td>
+					<td class="px-2 py-1 align-middle text-center">{{ schedule.bus.number_of_seats }}</td>
+					<td class="px-2 py-1 align-middle text-center">
 						{{ schedule.date|date:"Y-m-d h:i A" }}
 					</td>
 					<td>
@@ -47,8 +47,8 @@
 							</div>
 						</div>
 					</td>
-					<td>{{ schedule.price }}</td>
-					<td><a href="{% url 'booking' schedule.code %}">Book</a></td>
+					<td class="px-2 py-1 align-middle text-center">{{ schedule.price }}</td>
+					<td class="px-2 py-1 align-middle text-center"><a href="{% url 'booking' schedule.code %}">Book</a></td>
 				</tr>
 				{% endfor %}
 			</tbody>
