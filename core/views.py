@@ -80,3 +80,10 @@ def delete_booking(request, code):
     booking.delete()
 
     return redirect('scheduled')
+
+def find_trip(request):
+    locations = Location.objects.all()
+    context = {'locations': locations}
+    return render(request, 'core/find-trip.html', context)
+
+

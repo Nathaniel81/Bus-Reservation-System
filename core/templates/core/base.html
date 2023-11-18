@@ -38,7 +38,7 @@
             <a href="/" class="nav-link">Home</a>
           </li>
           <li class="nav-item">
-            <a href="#" class="nav-link">Find Trips</a>
+            <a href="{% url 'find-trip' %}" class="nav-link">Find Trips</a>
           </li>
           <li class="nav-item">
             <a href="{% url 'scheduled' %}" class="nav-link">Scheduled Trips</a>
@@ -54,7 +54,7 @@
   </div>
 		{% block content %}
 		{% endblock %}
-    <footer class="bg-dark text-light py-4 position-relative">
+    <footer class="bg-dark text-light py-3 position-relative">
       <div class="container">
         <div class="row">
           <div class="col-md-4">
