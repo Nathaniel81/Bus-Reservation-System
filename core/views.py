@@ -1,21 +1,38 @@
 from django.shortcuts import render, redirect,get_object_or_404
 from django.db.models import Q
+from django.core.paginator import (
+    Paginator,
+    EmptyPage,
+    PageNotAnInteger,
+)
 from .models import *
 from .forms import BookingForm
 
 def index(request):
-    context = {}  
+    schedules=None
+    items_page=None
     query = request.GET.get('query', '')
     if query:
-        context['schedules'] = Schedule.objects.filter(
+        schedules = Schedule.objects.filter(
 			Q(departure__name__icontains=query)|
 			Q(destination__name__icontains=query)|
 			Q(bus__name__icontains=query)|
 			Q(bus__driver__icontains=query)
 		).distinct()
-    else:
-        context['schedules'] = Schedule.objects.all()
-        context['bookings'] = Booking.objects.filter(user = request.user)
+
+        default_page = 1
+        page = request.GET.get('page', default_page)
+        items_per_page = 1
+        paginator = Paginator(schedules, items_per_page)
+
+        try:
+            items_page = paginator.page(page)
+        except PageNotAnInteger:
+            items_page = paginator.page(default_page)
+        except EmptyPage:
+            items_page = paginator.page(paginator.num_pages)
+
+    context = {'schedules': schedules, 'items_page': items_page, 'query': query}
     return render(request, 'core/index.html', context)
 
 def booking(request, code):
