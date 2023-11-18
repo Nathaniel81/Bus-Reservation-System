@@ -76,7 +76,14 @@ def searched_trip(request):
         items_page = paginator.page(default_page)
     except EmptyPage:
         items_page = paginator.page(paginator.num_pages)
+
+
+    context = {
+        'schedules': items_page, 
+        'items_page': items_page,
+        'depart': Location.objects.get(id=depart),
+        'destination': Location.objects.get(id=destination)
+        }
         
-        
-    return render(request, 'core/searched-trip.html', {'schedules': items_page, 'items_page': items_page})
+    return render(request, 'core/searched-trip.html', context)
 
