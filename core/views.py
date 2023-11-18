@@ -66,6 +66,7 @@ def searched_trip(request):
     depart = request.POST.get('depart')
     destination = request.POST.get('destination')
     schedules = Schedule.objects.filter(departure=depart, destination=destination)
+    
     default_page = 1
     page = request.GET.get('page', default_page)
     items_per_page = 1
@@ -82,7 +83,8 @@ def searched_trip(request):
         'schedules': items_page, 
         'items_page': items_page,
         'depart': Location.objects.get(id=depart),
-        'destination': Location.objects.get(id=destination)
+        'destination': Location.objects.get(id=destination),
+        'date': request.POST.get('date')
         }
         
     return render(request, 'core/searched-trip.html', context)
