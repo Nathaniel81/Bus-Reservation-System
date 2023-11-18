@@ -5,7 +5,11 @@
 body::-webkit-scrollbar {
 	display: none;
   }
-
+  body::before {
+	content: '';
+	height: 60px;
+	display: block;
+}
 
 table.table-bordered > thead > tr > th{
 	border:1px solid #fff;
