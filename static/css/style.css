@@ -1,0 +1,9 @@
+table.table-bordered > thead > tr > th{
+	border:1px solid #fff;
+}
+thead {
+  border-bottom-width: 2px;
+}
+.book {
+	margin-bottom:0.5px;
+}
