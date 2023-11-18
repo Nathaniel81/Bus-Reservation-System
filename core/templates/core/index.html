@@ -1,118 +1,200 @@
 {% extends 'core/base.html' %}
+{% load static %}
 {% block content %}
+<section class="bg-dark text-light p-5 p-lg-0 pt-lg-5 text-center text-sm-start">
+	<div class="container py-5">
+	  <div class="d-sm-flex align-items-center justify-content-between">
+		<div class="pe-5">
+		  <h1>Book Your <span class="text-warning">Bus Tickets</span></h1>
+		  <p class="lead my-4">
+			Explore our seamless bus reservation system, designed to make your travel experience convenient and hassle-free. We offer a range of options and cutting-edge features to ensure a smooth journey for every passenger.
+		  </p>
+		  <button class="btn btn-primary btn-lg" data-bs-toggle="modal" data-bs-target="#bookNow">
+			Reserve Your Seat
+		  </button>
+		</div>
+		<img class="img-fluid w-50 d-none d-sm-block ps-4" src="{% static 'images/bus3.png' %}" alt="Bus Showcase" />
+	  </div>
+	</div>
+  </section>
+  <section class="bg-primary text-light p-5">
+	<div class="container">
+	  <div class="d-md-flex justify-content-between align-items-center">
+		<h3 class="mb-3 mb-md-0">Get Travel Updates and Exclusive Offers</h3>
+  
+		<form class="bus-reservation-form">
+		  <div class="input-group news-input">
+			<input type="text" class="form-control" placeholder="Enter your Email" />
+			<button class="btn btn-dark btn-lg" type="button">Subscribe</button>
+		  </div>
+		</form>
+	  </div>
+	</div>
+  </section>
+  <section class="p-5">
+	<div class="container">
+	  <div class="row text-center g-4">
+		<div class="col-md">
+		  <div class="card bg-dark text-light">
+			<div class="card-body text-center">
+			  <div class="h1 mb-3">
+				<i class="bi bi-laptop"></i>
+			  </div>
+			  <h3 class="card-title mb-3">Online Booking</h3>
+			  <p class="card-text">
+				Discover the convenience of our online booking system. Reserve your bus tickets from the comfort of your home, using our user-friendly platform. Secure your seat with just a few clicks.
+			  </p>
+			  <a href="#" class="btn btn-primary">Book Now</a>
+			</div>
+		  </div>
+		</div>
+		<div class="col-md">
+		  <div class="card bg-secondary text-light">
+			<div class="card-body text-center">
+			  <div class="h1 mb-3">
+				<i class="bi bi-person-square"></i>
+			  </div>
+			  <h3 class="card-title mb-3">Flexible Options</h3>
+			  <p class="card-text">
+				Enjoy the flexibility of our bus reservation service. Choose from various travel packages and seating options to tailor your journey according to your preferences. We offer a range of choices for every traveler.
+			  </p>
+			  <a href="#" class="btn btn-dark">Explore Options</a>
+			</div>
+		  </div>
+		</div>
+		<div class="col-md">
+			<div class="card bg-dark text-light">
+			  <div class="card-body text-center">
+				<div class="h1 mb-3">
+					<i class="bi bi-people"></i>
+				</div>
+				<h3 class="card-title mb-3">Group Reservations</h3>
+				<p class="card-text">
+					Plan group trips effortlessly. Enjoy group discounts and receive support. Experience a seamless booking process tailored for your group, ensuring a delightful journey for everyone.
+				  </p>
+				<!-- <a href="#" class="btn btn-dark">Explore Options</a> -->
+				<a href="#" class="btn btn-primary">Book Now</a>
+			  </div>
+			</div>
+		  </div>
 
-	<form method="GET" action="." class="mt-4">
+	  </div>
+	</div>
+  </section>
+	
+  
+	<!-- <form method="GET" action="." class="mt-4">
 		<input type="text" name="query" value="{{ query }}"  class="form-control" />
 		<button class="btn btn-primary mt-2">Search</button>
-	</form>
-<div class="mt-5 mb-4">
-		{% if query %}
-		<div class="card bg-light">
-			<div class="card-header fw-bold">Searched Trip Result</div>
-			<div class="card-body">
-				<fieldset>
-                    <legend>Looking for</legend>
-                    <dl class="row my-0">
-                        <dt class="col-auto fw-bold">Date:</dt>
-                        <dd class="col-auto flex-grow-1 flex-shrink-1">ff</dd>
-                    </dl>
-                    <dl class="row my-0">
-                        <dt class="col-auto fw-bold">Depart:</dt>
-                        <dd class="col-auto flex-grow-1 flex-shrink-1">ss</dd>
-                    </dl>
-                    <dl class="row my-0">
-                        <dt class="col-auto fw-bold">Destination:</dt>
-                        <dd class="col-auto flex-grow-1 flex-shrink-1">dd</dd>
-                    </dl>
-                </fieldset>
-				<table class="table table-bordered">
-					<thead class="table-primary">
-						<tr class="px-2 py-1 align-middle text-center">
-							<th>#</th>
-							<th>Available Seats</th>
-							<th>Schedule</th>
-							<th>Bus</th>
-							<th>Route (From - To)</th>
-							<th>Fare</th>
-							<th>Action</th>
-						</tr>
-					</thead>
-					<tbody>
-						{% for schedule in schedules %}
-						<tr>
-							<td class="px-2 py-1 align-middle text-center">{{ forloop.counter }}</td>
-							<td class="px-2 py-1 align-middle text-center">{{ schedule.bus.number_of_seats }}</td>
-							<td class="px-2 py-1 align-middle text-center">
-								{{ schedule.date|date:"Y-m-d h:i A" }}
-							</td>
-							<td>
-								<div class="row row-cols-1">
-									<div class="col">
-										{{ schedule.bus.name }}
-									</div>
-									<div class="col">
-										<small class="muted">{{ schedule.bus.number }}</small>
-									</div>
-								</div>
+	</form> -->
+	<div class="mt-5 mb-4">
+			{% if query %}
+			<div class="card bg-light">
+				<div class="card-header fw-bold">Searched Trip Result</div>
+				<div class="card-body">
+					<fieldset>
+	                    <legend>Looking for</legend>
+	                    <dl class="row my-0">
+	                        <dt class="col-auto fw-bold">Date:</dt>
+	                        <dd class="col-auto flex-grow-1 flex-shrink-1">ff</dd>
+	                    </dl>
+	                    <dl class="row my-0">
+	                        <dt class="col-auto fw-bold">Depart:</dt>
+	                        <dd class="col-auto flex-grow-1 flex-shrink-1">ss</dd>
+	                    </dl>
+	                    <dl class="row my-0">
+	                        <dt class="col-auto fw-bold">Destination:</dt>
+	                        <dd class="col-auto flex-grow-1 flex-shrink-1">dd</dd>
+	                    </dl>
+	                </fieldset>
+					<table class="table table-bordered">
+						<thead class="table-primary">
+							<tr class="px-2 py-1 align-middle text-center">
+								<th>#</th>
+								<th>Available Seats</th>
+								<th>Schedule</th>
+								<th>Bus</th>
+								<th>Route (From - To)</th>
+								<th>Fare</th>
+								<th>Action</th>
+							</tr>
+						</thead>
+						<tbody>
+							{% for schedule in schedules %}
+							<tr>
+								<td class="px-2 py-1 align-middle text-center">{{ forloop.counter }}</td>
+								<td class="px-2 py-1 align-middle text-center">{{ schedule.bus.number_of_seats }}</td>
+								<td class="px-2 py-1 align-middle text-center">
+									{{ schedule.date|date:"Y-m-d h:i A" }}
 								</td>
-							<td>
-								<div class="row row-cols-1">
-									<div class="col">
-										{{ schedule.departure }}
+								<td>
+									<div class="row row-cols-1">
+										<div class="col">
+											{{ schedule.bus.name }}
+										</div>
+										<div class="col">
+											<small class="muted">{{ schedule.bus.number }}</small>
+										</div>
 									</div>
-									<div class="col">
-										{{ schedule.destination }}
+									</td>
+								<td>
+									<div class="row row-cols-1">
+										<div class="col">
+											{{ schedule.departure }}
+										</div>
+										<div class="col">
+											{{ schedule.destination }}
+										</div>
 									</div>
-								</div>
-							</td>
-							<td class="px-2 py-1 align-middle text-center">{{ schedule.price }}</td>
-							<td class="px-2 py-1 align-middle text-center">
-								<a href="{% url 'booking' schedule.code %}" class="btn btn-outline-primary btn-sm">
-									<div class="d-flex align-items-center gap-1  align-middle">
-										<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-ticket-fill" viewBox="0 0 16 16">
-											<path d="M1.5 3A1.5 1.5 0 0 0 0 4.5V6a.5.5 0 0 0 .5.5 1.5 1.5 0 1 1 0 3 .5.5 0 0 0-.5.5v1.5A1.5 1.5 0 0 0 1.5 13h13a1.5 1.5 0 0 0 1.5-1.5V10a.5.5 0 0 0-.5-.5 1.5 1.5 0 0 1 0-3A.5.5 0 0 0 16 6V4.5A1.5 1.5 0 0 0 14.5 3h-13Z"/>
-										</svg>
-										<span class="text-center book">
-											Book
-										</span>									
-									</div>
-								</a>
-							</td>
-						</tr>
-						{% endfor %}
-					</tbody>
-				</table>	
-				<div class="d-flex justify-content-end">
-					{% if items_page %}
-    					{% if items_page.has_other_pages %}
-    						<div class="btn-group" role="group" aria-label="Item pagination">
-    						    {% if items_page.has_previous %}
-    						        <a href="?page={{ items_page.previous_page_number }}" class="btn btn-outline-primary">&laquo;</a>
-    						    {% endif %}
-							
-    						    {% for page_number in items_page.paginator.page_range %}
-    						        {% if items_page.number == page_number %}
-    						            <button class="btn btn-outline-primary active">
-    						                <span>{{ page_number }} <span class="sr-only"></span></span>
-    						            </button>
-    						        {% else %}
-    						            <a href="?page={{ page_number }}" class="btn btn-outline-primary">
-    						                {{ page_number }}
-    						            </a>
-    						        {% endif %}
-    						    {% endfor %}
-									
-    						    {% if items_page.has_next %}
-    						        <a href="?page={{ items_page.next_page_number }}" class="btn btn-outline-primary">&raquo;</a>
-    						    {% endif %}
-    						</div>
-    					{% endif %}
-					{% else %}
-    					<p>No items found.</p>
-					{% endif %}
+								</td>
+								<td class="px-2 py-1 align-middle text-center">{{ schedule.price }}</td>
+								<td class="px-2 py-1 align-middle text-center">
+									<a href="{% url 'booking' schedule.code %}" class="btn btn-outline-primary btn-sm">
+										<div class="d-flex align-items-center gap-1  align-middle">
+											<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-ticket-fill" viewBox="0 0 16 16">
+												<path d="M1.5 3A1.5 1.5 0 0 0 0 4.5V6a.5.5 0 0 0 .5.5 1.5 1.5 0 1 1 0 3 .5.5 0 0 0-.5.5v1.5A1.5 1.5 0 0 0 1.5 13h13a1.5 1.5 0 0 0 1.5-1.5V10a.5.5 0 0 0-.5-.5 1.5 1.5 0 0 1 0-3A.5.5 0 0 0 16 6V4.5A1.5 1.5 0 0 0 14.5 3h-13Z"/>
+											</svg>
+											<span class="text-center book">
+												Book
+											</span>									
+										</div>
+									</a>
+								</td>
+							</tr>
+							{% endfor %}
+						</tbody>
+					</table>	
+					<div class="d-flex justify-content-end">
+						{% if items_page %}
+	    					{% if items_page.has_other_pages %}
+	    						<div class="btn-group" role="group" aria-label="Item pagination">
+	    						    {% if items_page.has_previous %}
+	    						        <a href="?page={{ items_page.previous_page_number }}" class="btn btn-outline-primary">&laquo;</a>
+	    						    {% endif %}
+								
+	    						    {% for page_number in items_page.paginator.page_range %}
+	    						        {% if items_page.number == page_number %}
+	    						            <button class="btn btn-outline-primary active">
+	    						                <span>{{ page_number }} <span class="sr-only"></span></span>
+	    						            </button>
+	    						        {% else %}
+	    						            <a href="?page={{ page_number }}" class="btn btn-outline-primary">
+	    						                {{ page_number }}
+	    						            </a>
+	    						        {% endif %}
+	    						    {% endfor %}
+										
+	    						    {% if items_page.has_next %}
+	    						        <a href="?page={{ items_page.next_page_number }}" class="btn btn-outline-primary">&raquo;</a>
+	    						    {% endif %}
+	    						</div>
+	    					{% endif %}
+						{% else %}
+	    					<p>No items found.</p>
+						{% endif %}
+					</div>
 				</div>
 			</div>
-		</div>
-		{% endif %}
-</div>
+			{% endif %}
+	</div>
 {% endblock %}
