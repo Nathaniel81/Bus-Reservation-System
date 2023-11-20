@@ -2,12 +2,30 @@
 {% load static %}
 {% block content %}
 
-<form action="{% url 'booking' code %}" method="POST">
-    {% csrf_token %}
-    <!-- <label for="seat_number" class="form-label">Seat Number:</label> -->
-    <!-- <input type="number" name="seat_number" id="seat_number" class="form-control" required /> -->
-    {{ form.as_p }}
-    <button type="submit" class="btn btn-primary">Submit</button>
-</form>
+<div class="container">
+    <div class="row">
+        <div class="py-5 col">
+            <form action="{% url 'booking' code %}" method="POST">
+                {% csrf_token %}
+                <div class="form-group mb-3 ">
+                    <label for="seat_number" class="control-label">Seat</label>
+                    <select name="seat_number" id="seat_number" class="form-select select2 rounded-0">
+                        <option selected></option>
+                        {% for seat in seat_available %}
+                        <option value="{{ seat }}" >{{ seat }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <button class="btn btn-sm rounded-0 btn-primary">
+                    Find Trip
+                </button>
+            </form>            
+        </div>
+        <div class="col py-5">
+            <img src="{% static 'images/buslayout.png' %}" class="d-md-none w-75" >
+            <img src="{% static 'images/bus.png' %}" class="d-none d-md-block w-100" >
+        </div>
+    </div>
+</div>
 
 {% endblock %}

@@ -63,6 +63,9 @@
 						</td>
 						<td class="px-2 py-1 align-middle text-center">{{ schedule.price }}</td>
 						<td class="px-2 py-1 align-middle text-center">
+							{% if schedule in booked %}
+							<button type="button" class="btn btn-secondary btn-sm" disabled>Booked</button>
+							{% else %}
 							<a href="{% url 'booking' schedule.code %}" class="btn btn-outline-primary btn-sm">
 								<div class="d-flex align-items-center gap-1  align-middle">
 									<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-ticket-fill" viewBox="0 0 16 16">
@@ -73,6 +76,7 @@
 									</span>									
 								</div>
 							</a>
+							{% endif %}
 						</td>
 					</tr>
 					{% endfor %}

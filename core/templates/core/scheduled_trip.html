@@ -51,14 +51,22 @@
 										<span class="bg-success badge rounded-pill bg-gradient px-2">
 											{{ booking.schedule.get_status_display }}
 										</span>
-									{% else %}
+									{% elif booking.schedule.status == '0' %}
 										<span class="bg-danger badge rounded-pill bg-gradient px-2">
 											{{ booking.schedule.get_status_display }}
 										</span>
+									{% else %}
+									<span class="bg-primary badge rounded-pill bg-gradient px-2">
+										{{ booking.schedule.get_status_display }}
+									</span>
 									{% endif %}
 								</td>
 								<td class="px-2 py-1 align-middle text-center">
+									{% if booking.schedule.status == '1' %}
 									<a href="{% url 'delete-booking' booking.code %}" class="btn btn-sm btn-outline-danger ">Cancel</a>
+									{% else %}
+									<a href="{% url 'delete-booking' booking.code %}" class="btn btn-sm btn-danger ">Delete</a>
+									{% endif %}
 								</td>
 							</tr>
 							{% endfor %}

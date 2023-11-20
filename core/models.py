@@ -10,8 +10,9 @@ TIME_CHOICES = (
         ('evening', 'Evening'),
     )
 STATUS_CHOICES = (
+    ('0','Cancelled'),
     ('1','Active'),
-    ('0','Cancelled')
+    ('2', 'Completed')
     )
 
 class User(AbstractUser):
@@ -60,9 +61,11 @@ class Schedule(models.Model):
 class Booking(models.Model):
     code = models.UUIDField(default=uuid.uuid4, editable=False, unique=True)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    schedule = models.ForeignKey(Schedule, on_delete=models.CASCADE)
+    schedule = models.ForeignKey(Schedule, related_name='bookings', on_delete=models.CASCADE)
     seat_number = models.PositiveIntegerField(unique=True)
     payment_status = models.BooleanField(default=False)
+    updated = models.DateTimeField(auto_now=True)
+    created = models.DateTimeField(auto_now_add=True)
     
     def __str__(self):
         return f"{self.user.name} - {self.schedule}"
