@@ -31,7 +31,7 @@ class Bus(models.Model):
     number = models.PositiveIntegerField()
     status = models.BooleanField(default=False)
     driver = models.CharField(max_length=100)
-    number_of_seats = models.PositiveIntegerField()
+    number_of_seats = models.PositiveIntegerField(default=51)
     
     def __str__(self):
         return f"{self.name} ({self.number}/{self.number_of_seats} seats)"

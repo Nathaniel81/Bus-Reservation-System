@@ -13,11 +13,10 @@ from datetime import datetime
 
 
 def update_schedule():
-    current_date = timezone.now().date()  # Use .date() to get only the date part
+    current_date = timezone.now().date()
     completed_schedules = Schedule.objects.filter(date__lt=current_date, status='1')
     
     for schedule in completed_schedules:
-        # Ensure the schedule's date is also in the same time zone
         schedule_date = timezone.make_aware(schedule.date)
 
         if schedule_date < current_date:
@@ -49,14 +48,10 @@ def booking(request, code):
             return render(request, 'core/forms.html', {'form': form, 'code': code})
     else:
         schedule = get_object_or_404(Schedule, code=code)
-        bookings = Booking.objects.filter(schedule=schedule)
-        seat_taken = [booking.seat_number for booking in bookings]
-        seat_available = []
-        for i in range(51):
-            if i == 0 or i in seat_taken:
-                continue
-            seat_available.append(i)
+        seat_taken = list(Booking.objects.filter(schedule=schedule).values_list('seat_number', flat=True))
+        seat_available = [i for i in range(1, 51) if i not in seat_taken]
         print(seat_taken, seat_available)
+
         return render(request, 'core/forms.html', {'form': BookingForm(), 'code': code, 'seat_available': seat_available})
 
 def scheduled(request):
@@ -97,7 +92,6 @@ def searched_trip(request):
     destination = request.POST.get('destination')
     date_str = request.POST.get('date')
     date = datetime.strptime(date_str, '%Y-%m-%d').date()
-    print(date)
     schedules = Schedule.objects.filter(departure=depart, destination=destination, date=date).order_by('-created')
     booked = []
     for schedule in schedules:
