@@ -10,10 +10,10 @@ def signUp(request):
         signupForm = SignUpForm(request.POST)
         if signupForm.is_valid:
             user = signupForm.save()
-            login(request, user)
-            return redirect('/')
+            auth_login(request, user)
+            return JsonResponse({'redirect': '/'})
     else:
-        signupForm = SignUpForm()
+        pass
     return render(request, 'core/base.html', {'signform': signupForm})
 
 def login(request):
