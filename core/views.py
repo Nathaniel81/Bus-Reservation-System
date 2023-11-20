@@ -93,8 +93,7 @@ def searched_trip(request):
     date = datetime.strptime(date_str, '%Y-%m-%d').date()
     schedules = Schedule.objects.filter(departure=depart, destination=destination, date=date).order_by('-created')
     booked = [schedule for schedule in schedules if schedule.bookings.filter(user=request.user).exists()]
-
-    
+  
     default_page = 1
     page = request.GET.get('page', default_page)
     items_per_page = 10

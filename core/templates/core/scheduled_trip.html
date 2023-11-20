@@ -63,9 +63,9 @@
 								</td>
 								<td class="px-2 py-1 align-middle text-center">
 									{% if booking.schedule.status == '1' %}
-									<a href="{% url 'delete-booking' booking.code %}" class="btn btn-sm btn-outline-danger ">Cancel</a>
+									<a href="{% url 'core:delete-booking' booking.code %}" class="btn btn-sm btn-outline-danger ">Cancel</a>
 									{% else %}
-									<a href="{% url 'delete-booking' booking.code %}" class="btn btn-sm btn-danger ">Delete</a>
+									<a href="{% url 'core:delete-booking' booking.code %}" class="btn btn-sm btn-danger ">Delete</a>
 									{% endif %}
 								</td>
 							</tr>

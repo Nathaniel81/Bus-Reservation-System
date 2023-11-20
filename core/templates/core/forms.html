@@ -5,7 +5,7 @@
 <div class="container">
     <div class="row">
         <div class="py-5 col">
-            <form action="{% url 'booking' code %}" method="POST">
+            <form action="{% url 'core:booking' code %}" method="POST">
                 {% csrf_token %}
                 <div class="form-group mb-3 ">
                     <label for="seat_number" class="control-label mb-2">Choose A Seat Number</label>

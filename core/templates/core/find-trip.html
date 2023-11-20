@@ -9,7 +9,7 @@
             </div>
             <div class="card-body">
                 <div class="container-fluid">
-                    <form id="login-user" method="POST" action="{% url 'searched_trip' %}">
+                    <form id="login-user" method="POST" action="{% url 'core:searched_trip' %}">
                         {% csrf_token %}
                         <div>
                             <div>
