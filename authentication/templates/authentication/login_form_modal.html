@@ -23,6 +23,11 @@
                     {{ login_form|crispy }}
                 </div>
             </form>
+			<div class="d-flex justify-content-center" style="display: none;">
+				<div class="spinner-border" role="status" id="spinner" style="display: none;">
+				  <span class="visually-hidden">Loading...</span>
+				</div>
+			  </div>
 			<div class="modal-footer">
 				<button class="btn btn-primary" id="submit" type="submit">Login</button>
 				<button class="btn btn-danger" data-bs-dismiss="modal">Close</button>

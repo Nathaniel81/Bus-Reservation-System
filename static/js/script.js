@@ -40,6 +40,7 @@ document.addEventListener('DOMContentLoaded', function () {
       const usernameField = document.querySelector('#id_username');
       const passwordField = document.querySelector('#id_password');
 	  const errMsg = document.querySelector('#err-msg');
+	  const spinner = document.getElementById('spinner');
 	  
       submitBtn.addEventListener('click', function (e) {
           e.preventDefault();
@@ -48,6 +49,7 @@ document.addEventListener('DOMContentLoaded', function () {
           const password = passwordField.value;
 		  console.log(username, password)
 		  const csrftoken = getCookie('csrftoken');
+		  spinner.style.display = 'inline-block';
           $.ajax({
               type: "POST",
               headers: { "X-CSRFToken": csrftoken },
@@ -58,13 +60,14 @@ document.addEventListener('DOMContentLoaded', function () {
               },
               dataType: 'json',
               success: function (response) {
-                  console.log(response);
-
 				  if (response.redirect) {
-					window.location.href = response.redirect;
-				}
+					setTimeout(function () {
+					  window.location.href = response.redirect;
+					}, 1000);
+				  }
 				if (response.message) {
 					errMsg.textContent = response.message
+					spinner.style.display = 'none';
 				}
               },
               error: function (xhr, errmsg, err) {
