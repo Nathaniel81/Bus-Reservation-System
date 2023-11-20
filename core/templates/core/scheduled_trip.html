@@ -1,7 +1,7 @@
 {% extends 'core/base.html' %}
 {% load static %}
 {% block content %}
-<div class="container pb-5">
+<div class="container my-5 py-5">
 	<div class="mt-5 mb-4">
 		<div class="card bg-light">
 			<div class="card-header fw-bold">Scheduled Trip</div>
@@ -23,7 +23,7 @@
 							{% for booking in bookings %}
 							<tr>
 								<td class="px-2 py-1 align-middle text-center">{{ forloop.counter }}</td>
-								<td class="px-2 py-1 align-middle text-center">{{ booking.schedule.date|date:"Y-m-d h:i A" }}</td>
+								<td class="px-2 py-1 align-middle text-center">{{ booking.schedule.date|date:"Y-m-d" }}</td>
 								<td class="px-2 py-1 align-middle text-center">{{ booking.seat_number }}</td>
 								<td>
 									<div class="row row-cols-1">
@@ -98,7 +98,7 @@
 								</div>
 							{% endif %}
 						{% else %}
-							<p>No items found.</p>
+							<p>No schedules found.</p>
 						{% endif %}
 					</div>
 				</div>

@@ -8,17 +8,21 @@ from django.core.paginator import (
 from .models import *
 from .forms import BookingForm
 from django.utils import timezone
-
+from datetime import datetime
 
 
 
 def update_schedule():
-    current_date = timezone.now()
+    current_date = timezone.now().date()  # Use .date() to get only the date part
     completed_schedules = Schedule.objects.filter(date__lt=current_date, status='1')
-
+    
     for schedule in completed_schedules:
-        schedule.status = '2'
-        schedule.save()
+        # Ensure the schedule's date is also in the same time zone
+        schedule_date = timezone.make_aware(schedule.date)
+
+        if schedule_date < current_date:
+            schedule.status = '2'
+            schedule.save()
 
 def index(request):
     update_schedule()
@@ -49,9 +53,10 @@ def booking(request, code):
         seat_taken = [booking.seat_number for booking in bookings]
         seat_available = []
         for i in range(51):
-            if i in seat_taken:
+            if i == 0 or i in seat_taken:
                 continue
             seat_available.append(i)
+        print(seat_taken, seat_available)
         return render(request, 'core/forms.html', {'form': BookingForm(), 'code': code, 'seat_available': seat_available})
 
 def scheduled(request):
@@ -90,7 +95,10 @@ def searched_trip(request):
     update_schedule()
     depart = request.POST.get('depart')
     destination = request.POST.get('destination')
-    schedules = Schedule.objects.filter(departure=depart, destination=destination).order_by('-created')
+    date_str = request.POST.get('date')
+    date = datetime.strptime(date_str, '%Y-%m-%d').date()
+    print(date)
+    schedules = Schedule.objects.filter(departure=depart, destination=destination, date=date).order_by('-created')
     booked = []
     for schedule in schedules:
         for b in schedule.bookings.all():

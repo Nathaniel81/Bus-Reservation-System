@@ -8,7 +8,7 @@
             <form action="{% url 'booking' code %}" method="POST">
                 {% csrf_token %}
                 <div class="form-group mb-3 ">
-                    <label for="seat_number" class="control-label">Seat</label>
+                    <label for="seat_number" class="control-label mb-2">Choose A Seat Number</label>
                     <select name="seat_number" id="seat_number" class="form-select select2 rounded-0">
                         <option selected></option>
                         {% for seat in seat_available %}
@@ -16,7 +16,7 @@
                         {% endfor %}
                     </select>
                 </div>
-                <button class="btn btn-sm rounded-0 btn-primary">
+                <button class="btn btn-sm btn-primary">
                     Find Trip
                 </button>
             </form>            

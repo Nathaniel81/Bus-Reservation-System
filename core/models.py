@@ -51,7 +51,7 @@ class Schedule(models.Model):
     price = models.FloatField()
     status = models.CharField(max_length=2, choices=STATUS_CHOICES , default=1)
     time_of_day = models.CharField(max_length=10, choices=TIME_CHOICES, default='morning')
-    date = models.DateTimeField()
+    date = models.DateField()
     updated = models.DateTimeField(auto_now=True)
     created = models.DateTimeField(auto_now_add=True)
 
