@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect,get_object_or_404
-from django.db.models import Q
+from django.contrib.auth.decorators import login_required
 from django.core.paginator import (
     Paginator,
     EmptyPage,
@@ -24,8 +24,10 @@ def update_schedule():
 
 def index(request):
     update_schedule()
+    
     return render(request, 'core/index.html')
 
+@login_required
 def booking(request, code):
     update_schedule()
     if request.method == 'POST':
@@ -53,6 +55,7 @@ def booking(request, code):
 
         return render(request, 'core/forms.html', {'form': BookingForm(), 'code': code, 'seat_available': seat_available})
 
+@login_required
 def scheduled(request):
     update_schedule()
     bookings = Booking.objects.filter(user=request.user).order_by('-created')
@@ -70,6 +73,7 @@ def scheduled(request):
     
     return render(request, 'core/scheduled_trip.html', {'bookings': items_page, 'items_page': items_page})
 
+@login_required
 def delete_booking(request, code):
     booking = get_object_or_404(Booking, code=code)
     schedule = booking.schedule
@@ -115,3 +119,4 @@ def searched_trip(request):
         }
         
     return render(request, 'core/searched-trip.html', context)
+

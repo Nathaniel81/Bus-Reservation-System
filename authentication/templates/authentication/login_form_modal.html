@@ -1,8 +1,8 @@
 {% load crispy_forms_tags %}
-<div class="modal fade" id="login">
+<div class="modal fade" id="login" tabindex="-1">
     <div class="modal-dialog centered modal-dialog-centered">
         <div class="modal-content">
-            <div class="modal-header">
+            <div class="modal-header d-flex justify-content-center">
                 <h1>Login</h1>
             </div>
             <form action="{% url 'auth:login' %}" method="POST">
@@ -28,15 +28,18 @@
 				  <span class="visually-hidden">Loading...</span>
 				</div>
 			  </div>
+			  <div class="d-flex justify-content-center" data-bs-toggle="modal" data-bs-target="#enroll" data-bs-dismiss="modal" id="signup-link" style="cursor: pointer">
+				New here? Sign Up
+			  </div>
+			  <ul class="messages" style="padding-left: 27%;">
+				<li style="list-style-type: none;">
+					<small id="err-msg">{{ message }}</small>
+				</li>
+			  </ul>
 			<div class="modal-footer">
 				<button class="btn btn-primary" id="submit" type="submit">Login</button>
 				<button class="btn btn-danger" data-bs-dismiss="modal">Close</button>
 			</div>
-			<ul class="messages" style="padding-left: 27%;">
-					<li style="list-style-type: none;">
-						<small id="err-msg">{{ message }}</small>
-					</li>
-			</ul>
         </div>
     </div>
 </div>

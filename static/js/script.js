@@ -74,5 +74,13 @@ document.addEventListener('DOMContentLoaded', function () {
                   console.log(xhr.status + ": " + xhr.responseText);
               }
           });
-      });
+    });	
+	const signupLink = document.getElementById('signup-link');
+
+    // Add an event listener for the modal show event
+    signupLink.addEventListener('click', function() {
+        // Close the login modal by selecting its element and triggering the close action
+        const loginModal = new bootstrap.Modal(document.getElementById('login'));
+        loginModal.hide();
+    });
 });
