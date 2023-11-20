@@ -1,3 +1,4 @@
+{% load crispy_forms_tags %}
 <div class="modal fade" id="login">
     <div class="modal-dialog centered modal-dialog-centered">
         <div class="modal-content">
@@ -7,6 +8,7 @@
             <form action="{% url 'auth:login' %}" method="POST">
                 {% csrf_token %}
                 <div class="modal-body">
+					{% comment %}
                     <div class="mb-3">
                         <label for="username" class="col-form-label">Username:</label>
                         {{ login_form.username }}
@@ -16,11 +18,26 @@
                         {{ login_form.password }}
                     </div>
                 </div>
-                <div class="modal-footer">
-                    <button class="btn btn-primary" type="submit">Login</button>
-                    <button class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+				{% endcomment %}
+				<div class="modal-body">
+                    {{ login_form|crispy }}
                 </div>
             </form>
+			<div class="modal-footer">
+				<button class="btn btn-primary" id="submit" type="submit">Login</button>
+				<button class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+			</div>
+			<ul class="messages" style="padding-left: 27%;">
+					<li style="list-style-type: none;">
+						<small id="err-msg">{{ message }}</small>
+					</li>
+			</ul>
         </div>
     </div>
 </div>
+<style>
+	.asteriskField {
+    display: none;
+}
+</style>
+

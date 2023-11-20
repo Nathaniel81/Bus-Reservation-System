@@ -40,6 +40,8 @@ INSTALLED_APPS = [
     'core',
     'authentication',
     'phonenumber_field',
+    'crispy_forms',
+    'crispy_bootstrap5',
 ]
 
 MIDDLEWARE = [
@@ -132,6 +134,8 @@ MEDIA_ROOT = BASE_DIR / 'media'
 
 LOGOUT_REDIRECT_URL = '/'
 
+CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
+CRISPY_TEMPLATE_PACK = "bootstrap5"
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
