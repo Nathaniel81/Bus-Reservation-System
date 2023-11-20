@@ -11,7 +11,6 @@ from django.utils import timezone
 from datetime import datetime
 
 
-
 def update_schedule():
     current_date = timezone.now().date()
     completed_schedules = Schedule.objects.filter(date__lt=current_date, status='1')
@@ -93,11 +92,8 @@ def searched_trip(request):
     date_str = request.POST.get('date')
     date = datetime.strptime(date_str, '%Y-%m-%d').date()
     schedules = Schedule.objects.filter(departure=depart, destination=destination, date=date).order_by('-created')
-    booked = []
-    for schedule in schedules:
-        for b in schedule.bookings.all():
-            if b.user == request.user:
-               booked.append(schedule)
+    booked = [schedule for schedule in schedules if schedule.bookings.filter(user=request.user).exists()]
+
     
     default_page = 1
     page = request.GET.get('page', default_page)
