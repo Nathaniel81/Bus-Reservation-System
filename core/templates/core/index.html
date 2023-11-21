@@ -25,7 +25,7 @@
   
 		<form class="bus-reservation-form">
 		  <div class="input-group news-input">
-			<input type="text" class="form-control" placeholder="Enter your Email" />
+			<input type="text" class="form-control" id="subscribe" placeholder="Enter your Email" />
 			<button class="btn btn-dark btn-lg" type="button">Subscribe</button>
 		  </div>
 		</form>
@@ -137,14 +137,14 @@
 	</div>
   </section>
 
-  <section>
+  <section class="bg-dark text-light p-5">
 	<div class="container">
 		<div class="text-center py-5">
 			<h2>How To?</h2>
 		</div>
 		<div class="row text-center g-4">
 			<div class="col-md">
-			  <div class="card bg-light text-dark border-0">
+			  <div class="card bg-dark text-light border-0">
 				<div class="card-body text-center">
 				  <div class="h1 mb-3">
 					<svg xmlns="http://www.w3.org/2000/svg" width="56" height="56" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
@@ -159,7 +159,7 @@
 			  </div>
 			</div>
 			<div class="col-md">
-				<div class="card bg-light text-dark border-0">
+				<div class="card bg-dark text-light border-0">
 				  <div class="card-body text-center">
 					<div class="h1 mb-3">
 						<svg xmlns="http://www.w3.org/2000/svg" width="56" height="56" fill="currentColor" class="bi bi-ticket" viewBox="0 0 16 16">
@@ -173,8 +173,8 @@
 				  </div>
 				</div>
 			  </div>
-			  <div class="col-md">
-				<div class="card bg-light text-dark border-0">
+			  <div class="col-md pb-5">
+				<div class="card bg-dark text-light border-0">
 				  <div class="card-body text-center">
 					<div class="h1 mb-3">
 						<svg xmlns="http://www.w3.org/2000/svg" width="56" height="56" fill="currentColor" class="bi bi-credit-card" viewBox="0 0 16 16">
@@ -193,7 +193,7 @@
 	</div>
   </section>
 
-  <section id="learn" class="p-5 bg-dark text-light mt-5">
+  <section id="learn" class="bg-light text-dark mt-5 py-5">
 	<div class="container">
 	  <div class="row g-4">
 		<div class="col-md">
@@ -201,25 +201,25 @@
 			<div class="d-flex gap-3 justify-content-between">
 				<div>
 					<div id="map">
-						<img src="{% static 'images/bus3.png' %}" alt="" class="img-fluid" width="500px;"/>
+						<img src="{% static 'images/bus4.png' %}" alt="" class="img-fluid" width="500px;"/>
 					</div>
 				</div>
 				<div>
 					<h2 class="text-center mb-4">Reservation Support</h2>
-        			<ul class="list-group list-group-flush lead bg-dark">
-        			  <li class="list-group-item bg-dark text-light">
+        			<ul class="list-group list-group-flush lead bg-light">
+        			  <li class="list-group-item bg-light text-dark">
         			    <span class="fw-bold">Main Office:</span> 123 Bus Terminal Addis Ababa
         			  </li>
-        			  <li class="list-group-item bg-dark text-light">
+        			  <li class="list-group-item bg-light text-dark">
         			    <span class="fw-bold">Reservation Helpline:</span> +251 555-5555
         			  </li>
-        			  <li class="list-group-item bg-dark text-light">
+        			  <li class="list-group-item bg-light text-dark">
         			    <span class="fw-bold">Customer Support:</span> +251 333-3333
         			  </li>
-        			  <li class="list-group-item bg-dark text-light">
+        			  <li class="list-group-item bg-light text-dark">
         			    <span class="fw-bold">Reservation Email:</span> reservations@busbookings.test
         			  </li>
-        			  <li class="list-group-item bg-dark text-light">
+        			  <li class="list-group-item bg-light text-dark">
         			    <span class="fw-bold">Customer Service Email:</span> support@busbookings.test
         			  </li>
         			</ul>
@@ -232,6 +232,4 @@
 	  </div>
 	</div>
   </section>
-
-
 {% endblock %}

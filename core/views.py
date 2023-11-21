@@ -13,14 +13,32 @@ from datetime import datetime
 
 def update_schedule():
     current_date = timezone.now().date()
-    completed_schedules = Schedule.objects.filter(date__lt=current_date, status='1')
-    
-    for schedule in completed_schedules:
-        schedule_date = timezone.make_aware(schedule.date)
+    schedule = Schedule.objects.all()
+    for s in schedule:
+        schedule_id = s.id
+        bookings = Booking.objects.filter(schedule_id=schedule_id)
+        print(bookings)
+        
+    # completed_schedules = Schedule.objects.filter(date__lt=current_date, status='1')
+    # cancelled_schedules = Schedule.objects.filter(status='0')
+    # if cancelled_schedules.exists():
+    #     buses = Bus.objects.filter(schedule__in=cancelled_schedules)
+    #     for bus in buses:
+    #         initial_number_of_seats = bus._meta.get_field('number_of_seats').get_default()
+    #         bus.number_of_seats = initial_number_of_seats
+    #         bus.save()
 
-        if schedule_date < current_date:
-            schedule.status = '2'
-            schedule.save()
+    # for schedule in completed_schedules:
+    #     schedule_date = timezone.make_aware(schedule.date)
+
+    #     if schedule_date < current_date:
+    #         schedule.status = '2'
+    #         schedule.save()
+    #         bus = schedule.bus
+    #         initial_number_of_seats = bus._meta.get_field('number_of_seats').get_default()
+    #         bus.number_of_seats = initial_number_of_seats
+    #         bus.save()
+    #         print(bus.number_of_seats)
 
 def index(request):
     update_schedule()
@@ -43,7 +61,7 @@ def booking(request, code):
             booked_seats = Booking.objects.filter(schedule=schedule).count()
             schedule.bus.number_of_seats = schedule.bus.number_of_seats - booked_seats
             schedule.bus.save()                
-            return redirect('scheduled')
+            return redirect('core:scheduled')
         else:
             print(form.errors)
             return render(request, 'core/forms.html', {'form': form, 'code': code})
@@ -81,7 +99,7 @@ def delete_booking(request, code):
     schedule.bus.save()
     booking.delete()
 
-    return redirect('scheduled')
+    return redirect('core:scheduled')
 
 def find_trip(request):
     update_schedule()

@@ -3,18 +3,24 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login as auth_login
 from .forms import SignUpForm, LoginForm
 from django.contrib import messages
-from django.http import JsonResponse
+from django.http import JsonResponse, HttpResponse
 
 def signUp(request):
     if request.method == 'POST':
+        print('POST')
         signupForm = SignUpForm(request.POST)
-        if signupForm.is_valid:
+        print(signupForm)
+        if signupForm.is_valid():
+            print('Valid')
             user = signupForm.save()
             auth_login(request, user)
             return JsonResponse({'redirect': '/'})
+        else:
+            print('Form errors:', signupForm.errors)
+            return HttpResponse({'Invalid': 'Invalid'})
     else:
         pass
-    return render(request, 'core/base.html', {'signform': signupForm})
+    return render(request, 'core/index.html', {'msg': 'Error'})
 
 def login(request):
     if request.method == 'POST':

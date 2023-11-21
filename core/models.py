@@ -47,7 +47,7 @@ class Schedule(models.Model):
     code = models.UUIDField(default=uuid.uuid4, editable=False, unique=True)
     departure = models.ForeignKey(Location, related_name='departures', on_delete=models.CASCADE)
     destination = models.ForeignKey(Location, related_name='destinations', on_delete=models.CASCADE)
-    bus = models.ForeignKey(Bus, on_delete=models.CASCADE)
+    bus = models.ForeignKey(Bus, related_name='schedule', on_delete=models.CASCADE)
     price = models.FloatField()
     status = models.CharField(max_length=2, choices=STATUS_CHOICES , default=1)
     time_of_day = models.CharField(max_length=10, choices=TIME_CHOICES, default='morning')

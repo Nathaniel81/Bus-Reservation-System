@@ -1,19 +1,42 @@
-<div class="modal fade" id="#enroll">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h1>Sign Up</h1>
-            </div>
-            <form method="post" action="{% url 'auth:signup' %}">
-                {% csrf_token %}
-                <div class="modal-body">
-                    
-                </div>
-                <div class="modal-footer">
-                    <button class="btn btn-primary" type="submit">Sign Up</button>
-                    <button class="btn btn-danger" data-bs-dismiss="modal">Close</button>
-                </div>
-            </form>
-        </div>
-    </div>
+{% load crispy_forms_tags %}
+<div
+class="modal fade"
+id="enroll"
+tabindex="-1"
+aria-labelledby="enrollLabel"
+aria-hidden="true"
+>
+<div class="modal-dialog">
+  <div class="modal-content">
+	<div class="modal-header">
+	  <h5 class="modal-title" id="enrollLabel">Sign Up</h5>
+	  <button
+		type="button"
+		class="btn-close"
+		data-bs-dismiss="modal"
+		aria-label="Close"
+	  ></button>
+	</div>
+	<div class="modal-body">
+	  <form>
+		{{ signup_form|crispy }}
+		<ul class="messages" style="padding-left: 27%;">
+			<li style="list-style-type: none;">
+				<small id="err-msg">{{ message }}</small>
+			</li>
+		  </ul>
+		<div class="modal-footer">
+		  <button
+			type="button"
+			class="btn btn-secondary"
+			data-bs-dismiss="modal"
+		  >
+			Close
+		  </button>
+		  <button type="submit" class="btn btn-primary" id="signupBtn">Submit</button>
+		</div>
+	  </form>
+	</div>
+  </div>
+</div>
 </div>

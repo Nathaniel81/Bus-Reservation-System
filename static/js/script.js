@@ -74,7 +74,60 @@ document.addEventListener('DOMContentLoaded', function () {
                   console.log(xhr.status + ": " + xhr.responseText);
               }
           });
-		  
-
     });	
+
+	const nameField = document.querySelector('#id_name');
+	const userNameField= document.querySelector('#signup_id_username');
+	const phoneNumberField = document.querySelector('#id_phone_number');
+	const password1Field = document.querySelector('#id_password1');
+	const password2Field = document.querySelector('#id_password2');
+	const emailField = document.querySelector('#id_email');
+	const signupBtn = document.querySelector('#signupBtn');
+
+
+		  signupBtn.addEventListener('click', function(e) {
+			e.preventDefault();
+			const name = nameField.value;
+			const username = userNameField.value;
+			const phoneNumber = phoneNumberField.value;
+			const password1 = password1Field.value;
+			const password2 = password2Field.value;
+			const email = emailField.value;
+			console.log(name, username, phoneNumber, password1, password2);
+
+		const csrftoken = getCookie('csrftoken');
+		// spinner.style.display = 'inline-block';
+          $.ajax({
+              type: "POST",
+              headers: { "X-CSRFToken": csrftoken },
+              url: "/auth/signup/",
+              data: {
+				  name: name,
+                  username: username,
+				  email: email,
+				  phone_number: phoneNumber,
+                  password1: password1,
+				  password2: password2,
+				  
+              },
+              dataType: 'json',
+              success: function (response) {
+				  if (response.redirect) {
+					setTimeout(function () {
+					  window.location.href = response.redirect;
+					}, 1000);
+				  }
+				if (response.message) {
+					errMsg.textContent = response.message
+					// spinner.style.display = 'none';
+				}
+              },
+              error: function (xhr, errmsg, err) {
+                  console.log(xhr.status + ": " + xhr.responseText);
+              }
+          });
+
+		  })
+
+
 });
