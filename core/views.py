@@ -13,32 +13,27 @@ from datetime import datetime
 
 def update_schedule():
     current_date = timezone.now().date()
-    schedule = Schedule.objects.all()
-    for s in schedule:
-        schedule_id = s.id
-        bookings = Booking.objects.filter(schedule_id=schedule_id)
-        print(bookings)
-        
-    # completed_schedules = Schedule.objects.filter(date__lt=current_date, status='1')
-    # cancelled_schedules = Schedule.objects.filter(status='0')
-    # if cancelled_schedules.exists():
-    #     buses = Bus.objects.filter(schedule__in=cancelled_schedules)
-    #     for bus in buses:
-    #         initial_number_of_seats = bus._meta.get_field('number_of_seats').get_default()
-    #         bus.number_of_seats = initial_number_of_seats
-    #         bus.save()
+    schedule = Schedule.objects.filter(status='0')
+    completed_schedules = Schedule.objects.filter(date__lt=current_date, status='1')
+    cancelled_schedules = Schedule.objects.filter(status='0')
+    if cancelled_schedules.exists():
+        buses = Bus.objects.filter(schedule__in=cancelled_schedules)
+        for bus in buses:
+            initial_number_of_seats = bus._meta.get_field('number_of_seats').get_default()
+            bus.number_of_seats = initial_number_of_seats
+            bus.save()
 
-    # for schedule in completed_schedules:
-    #     schedule_date = timezone.make_aware(schedule.date)
+    for schedule in completed_schedules:
+        schedule_date = timezone.make_aware(schedule.date)
 
-    #     if schedule_date < current_date:
-    #         schedule.status = '2'
-    #         schedule.save()
-    #         bus = schedule.bus
-    #         initial_number_of_seats = bus._meta.get_field('number_of_seats').get_default()
-    #         bus.number_of_seats = initial_number_of_seats
-    #         bus.save()
-    #         print(bus.number_of_seats)
+        if schedule_date < current_date:
+            schedule.status = '2'
+            schedule.save()
+            bus = schedule.bus
+            initial_number_of_seats = bus._meta.get_field('number_of_seats').get_default()
+            bus.number_of_seats = initial_number_of_seats
+            bus.save()
+            print(bus.number_of_seats)
 
 def index(request):
     update_schedule()
@@ -52,7 +47,6 @@ def booking(request, code):
         form = BookingForm(request.POST)
         schedule = get_object_or_404(Schedule, code=code)
         if form.is_valid():
-            print('Valid')
             book = form.save(commit=False)
             book.user = request.user
             book.schedule = schedule
@@ -63,7 +57,7 @@ def booking(request, code):
             schedule.bus.save()                
             return redirect('core:scheduled')
         else:
-            print(form.errors)
+            # print(form.errors)
             return render(request, 'core/forms.html', {'form': form, 'code': code})
     else:
         schedule = get_object_or_404(Schedule, code=code)
