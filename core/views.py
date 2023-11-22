@@ -64,7 +64,6 @@ def booking(request, code):
             return redirect('payment_gateway:pay')
 
         else:
-            # print(form.errors)
             return render(request, 'core/forms.html', {'form': form, 'code': code})
     else:
         schedule = get_object_or_404(Schedule, code=code)
