@@ -51,18 +51,20 @@ def booking(request, code):
             book.user = request.user
             book.schedule = schedule
             book.payment_status = True
+            
             book.save()
             booked_seats = Booking.objects.filter(schedule=schedule).count()
             schedule.bus.number_of_seats = schedule.bus.number_of_seats - booked_seats
             schedule.bus.save()     
                        
-            return redirect('core:scheduled')
+            return redirect('payment_gateway:pay')
         else:
             # print(form.errors)
             return render(request, 'core/forms.html', {'form': form, 'code': code})
     else:
         schedule = get_object_or_404(Schedule, code=code)
         seat_taken = list(Booking.objects.filter(schedule=schedule).values_list('seat_number', flat=True))
+        
         seat_available = [i for i in range(1, 52) if i not in seat_taken]
 
         return render(request, 'core/forms.html', {'form': BookingForm(), 'code': code, 'seat_available': seat_available})

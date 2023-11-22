@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'core',
     'authentication',
+    'payment_gateway',
     'phonenumber_field',
     'crispy_forms',
     'crispy_bootstrap5',
