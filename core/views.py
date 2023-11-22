@@ -130,4 +130,3 @@ def searched_trip(request):
         }
         
     return render(request, 'core/searched-trip.html', context)
-
