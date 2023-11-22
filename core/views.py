@@ -54,7 +54,8 @@ def booking(request, code):
             book.save()
             booked_seats = Booking.objects.filter(schedule=schedule).count()
             schedule.bus.number_of_seats = schedule.bus.number_of_seats - booked_seats
-            schedule.bus.save()                
+            schedule.bus.save()     
+                       
             return redirect('core:scheduled')
         else:
             # print(form.errors)
