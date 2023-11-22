@@ -37,7 +37,6 @@ def update_schedule():
 # from django.urls import reverse
 # from django.http import HttpResponseRedirect
 
-
 def index(request):
     update_schedule()
     
