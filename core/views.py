@@ -39,7 +39,6 @@ def update_schedule():
 def process_payment(form, user, schedule):
     pass
 
-
 def index(request):
     update_schedule()
     
