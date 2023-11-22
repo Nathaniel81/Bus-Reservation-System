@@ -33,7 +33,13 @@ def update_schedule():
             initial_number_of_seats = bus._meta.get_field('number_of_seats').get_default()
             bus.number_of_seats = initial_number_of_seats
             bus.save()
-            print(bus.number_of_seats)
+
+# from django.urls import reverse
+# from django.http import HttpResponseRedirect
+def process_payment(form, user, schedule):
+    pass
+
+    
 
 def index(request):
     update_schedule()
@@ -50,14 +56,13 @@ def booking(request, code):
             book = form.save(commit=False)
             book.user = request.user
             book.schedule = schedule
-            book.payment_status = True
-            
-            book.save()
-            booked_seats = Booking.objects.filter(schedule=schedule).count()
-            schedule.bus.number_of_seats = schedule.bus.number_of_seats - booked_seats
-            schedule.bus.save()     
-                       
+
+            request.session['pending_booking'] = {
+                'book': book,
+                'price': schedule.price,
+            }
             return redirect('payment_gateway:pay')
+
         else:
             # print(form.errors)
             return render(request, 'core/forms.html', {'form': form, 'code': code})
