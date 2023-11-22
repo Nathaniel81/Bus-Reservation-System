@@ -36,8 +36,7 @@ def update_schedule():
 
 # from django.urls import reverse
 # from django.http import HttpResponseRedirect
-def process_payment(form, user, schedule):
-    pass
+
 
 def index(request):
     update_schedule()
