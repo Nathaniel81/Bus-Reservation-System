@@ -63,7 +63,6 @@ def booking(request, code):
         schedule = get_object_or_404(Schedule, code=code)
         seat_taken = list(Booking.objects.filter(schedule=schedule).values_list('seat_number', flat=True))
         seat_available = [i for i in range(1, 52) if i not in seat_taken]
-        print(seat_taken, seat_available)
 
         return render(request, 'core/forms.html', {'form': BookingForm(), 'code': code, 'seat_available': seat_available})
 
