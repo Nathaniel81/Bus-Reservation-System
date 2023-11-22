@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect,get_object_or_404
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.core.paginator import (
     Paginator,
@@ -45,18 +45,23 @@ def booking(request, code):
     if request.method == 'POST':
         form = BookingForm(request.POST)
         schedule = get_object_or_404(Schedule, code=code)
+        
         if form.is_valid():
+            print('valid')
             book = form.save(commit=False)
             book.user = request.user
             book.schedule = schedule
+            book.save()
+            booking_id = book.id
+            print('Booking Id: ', booking_id)
 
             request.session['pending_booking'] = {
-                'book': book,
-                'price': schedule.price,
+                'booking_id': booking_id,
             }
             return redirect('payment_gateway:pay')
 
         else:
+            # print(form.errors)
             return render(request, 'core/forms.html', {'form': form, 'code': code})
     else:
         schedule = get_object_or_404(Schedule, code=code)
