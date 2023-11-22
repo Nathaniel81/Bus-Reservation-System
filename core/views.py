@@ -34,7 +34,6 @@ def update_schedule():
             bus.number_of_seats = initial_number_of_seats
             bus.save()
 
-
 def index(request):
     update_schedule()
     
