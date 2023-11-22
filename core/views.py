@@ -35,7 +35,6 @@ def update_schedule():
             bus.save()
 
 
-
 def index(request):
     update_schedule()
     
