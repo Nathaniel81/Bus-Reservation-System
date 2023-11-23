@@ -57,6 +57,8 @@ Designing and implementing features such as schedule search, seat selection, and
 </p>
 <img src="./static/Search.PNG">  
 </td>
+</tr>
+<tr>
 <td width="50%">
 <br>
 <p align="center">
@@ -71,4 +73,5 @@ Designing and implementing features such as schedule search, seat selection, and
 </p>
 <img src="./static/payment.PNG">  
 </td>
+</tr>
 </table>
