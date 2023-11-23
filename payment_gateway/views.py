@@ -5,7 +5,8 @@ import requests
 from core.models import Booking
 
 def pay(request):
-    return render(request, 'payment_gateway/index.html')
+    price = request.session['pending_booking_price']
+    return render(request, 'payment_gateway/index.html', {'price': price})
 
 # def payment_link_view(request):
 #     payment_link_html = """
@@ -33,7 +34,10 @@ def success(request):
     verification_url = 'https://yenepay.com/api/verify/pdt/'
     total = request.GET.get('TotalAmount')
     status = request.GET.get('Status') 
-    verification_payload = {}
+    verification_payload = {
+        'total': total,
+        'status': status,
+    }
     verification_response = requests.post(verification_url, data=verification_payload)
     # booking = request.session.get('pending_booking', {}).get('booking_id')
     booking_id = request.session.get('pending_booking_id')
@@ -44,4 +48,8 @@ def success(request):
         return redirect('core:scheduled')
     else:
         booking.delete()
+
+    del request.session['pending_booking_id']
+    del request.session['pending_booking_price']
+
     return HttpResponse(status=400)
