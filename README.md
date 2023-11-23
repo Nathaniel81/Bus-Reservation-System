@@ -1,5 +1,5 @@
 <div align="center">
-# TravelEase Bus Reservation System
+# TravelEase
 </div>
 
 ## **TravelEase**
