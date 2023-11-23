@@ -1,7 +1,3 @@
-<div align="center">
-# TravelEase
-</div>
-
 ## **TravelEase**
 
 Welcome to TravelEase, a bus reservation system built as a personal learning project. TravelEase allows users to search for bus schedules, book available seats, and securely complete the payment process using the local payment gateway, YenePay. This project is developed using HTML, CSS, Bootstrap, JavaScript, and Django.
