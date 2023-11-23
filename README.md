@@ -8,11 +8,17 @@ Welcome to TravelEase, a bus reservation system built as a personal learning pro
 
 ## **Features**
 
-### Search Schedules: Users can easily search for available bus schedules based on their preferred routes and travel dates.
+### Search Schedules: 
 
-### Seat Selection: TravelEase provides an intuitive interface for users to select their preferred seat numbers from the available options.
+Users can easily search for available bus schedules based on their preferred routes and travel dates.
 
-### Secure Payment: The system integrates with the local payment gateway, YenePay, ensuring a secure and reliable payment process for users.
+### Seat Selection: 
+
+TravelEase provides an intuitive interface for users to select their preferred seat numbers from the available options.
+
+### Secure Payment: 
+
+The system integrates with the local payment gateway, YenePay, ensuring a secure and reliable payment process for users.
 
 ## **Setup**
 
