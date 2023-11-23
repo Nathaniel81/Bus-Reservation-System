@@ -46,15 +46,29 @@ Designing and implementing features such as schedule search, seat selection, and
 &nbsp; 
 <br>
 <p align="center">
-  
+  Landing
 </p>
-<img src="">
+<img src="./static/home.PNG">
 </td> 
 <td width="50%">
 <br>
 <p align="center">
-  
+  Search
 </p>
-<img src="">  
+<img src="./static/Search.PNG">  
+</td>
+<td width="50%">
+<br>
+<p align="center">
+  Result
+</p>
+<img src="./static/result.PNG">
+</td>
+<td width="50%">
+<br>
+<p align="center">
+  Payment
+</p>
+<img src="./static/payment.PNG">  
 </td>
 </table>
